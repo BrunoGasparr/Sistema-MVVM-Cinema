@@ -1,10 +1,14 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Usuario {
     private String id;
     private String nome;
     private String cpf;
     private String email;
+    private final List<Ingresso> ingressos = new ArrayList<>();
 
     public Usuario(String id, String nome, String cpf, String email) {
         this.id = id;
