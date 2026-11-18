@@ -16,11 +16,12 @@ public class CarrinhoViewModel {
     private List<Sessao> sessoes = new ArrayList<>();
     private List<String> exibicaoSessoes = new ArrayList<>();
     private List<Ingresso> carrinho = new ArrayList<>();
+    private List<String> exibicaoCarrinho = new ArrayList<>();
 
     public void logarUsuario(Usuario usuario, String senha) {
-        if (senha.equals(usuarioLogado.getSenha())){
+        if (senha.equals(usuario.getSenha())){
             this.usuarioLogado = usuario;
-            support.firePropertyChange("usuarioLogado", null, usuarioLogado);
+            support.firePropertyChange("usuarioLogado", null, usuarioLogado.getNome());
         }
     }
 
@@ -33,6 +34,15 @@ public class CarrinhoViewModel {
         support.firePropertyChange("listaSessoes", null, this.exibicaoSessoes);
     }
 
+    public void atualizarCarrinho(List<Ingresso> carrinho) {
+        this.carrinho = carrinho;
+        this.exibicaoCarrinho.clear();
+        for (Ingresso ingresso : carrinho) {
+            this.exibicaoCarrinho.add(ingresso.toString());
+        }
+        support.firePropertyChange("listaCarrinho", null, this.exibicaoCarrinho);
+    }
+
     public void comprarIngressos(int id, int quantidade){
         if (sessoes.get(id).getNumeroAssentos()>=quantidade && (this.usuarioLogado!=null)){
             for (int i=1; i<=quantidade; i++){
@@ -43,10 +53,18 @@ public class CarrinhoViewModel {
                 sessoes.remove(id);
                 atualizarSessoes(sessoes);
             } else {
-                sessoes.get(id).setNumeroAssentos(sessoes.get(id).getNumeroAssentos()-quantidade);
+                sessoes.get(id).setNumeroAssentos(sessoes.get(id).getNumeroAssentos() - quantidade);
             }
-            support.firePropertyChange("carrinho", null,  carrinho);
+            atualizarCarrinho(carrinho);
         }
+    }
+
+    public void pagarCarrinho(){
+        for (Ingresso ingresso : carrinho) {
+            usuarioLogado.getIngressos().add(ingresso);
+        }
+        carrinho.clear();
+        atualizarCarrinho(carrinho);
     }
 
     public double calcularValorCarrinho(){
@@ -55,19 +73,6 @@ public class CarrinhoViewModel {
             valorCarrinho += ingresso.getSessao().getPreco();
         }
         return valorCarrinho;
-    }
-
-    public void pagarCarrinho(){
-        for (Ingresso ingresso : carrinho) {
-            usuarioLogado.getIngressos().add(ingresso);
-        }
-        carrinho.clear();
-        support.firePropertyChange("carrinho", null, carrinho);
-    }
-
-    public void deslogar(){
-        usuarioLogado = null;
-        support.firePropertyChange("usuarioLogado", "null", usuarioLogado);
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

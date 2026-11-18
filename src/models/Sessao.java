@@ -56,11 +56,4 @@ public class Sessao {
     public void setNumeroAssentos(int numeroAssentos) {
         this.numeroAssentos = numeroAssentos;
     }
-
-    @Override
-    public String toString() {
-        return "Sessão %s\nPreço: %.2f\nData: %1$td/%1$tm/%1$tY às %1$tH:%1$tM\nSala: %d\nAssentos Disponíveis: %d".formatted(
-                getFilme().getTitulo(), getPreco(), getData(), getSala(), getNumeroAssentos()
-        );
-    }
 }

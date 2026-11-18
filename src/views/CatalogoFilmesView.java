@@ -12,7 +12,6 @@ public class CatalogoFilmesView {
 
     public CatalogoFilmesView(CatalogoViewModel viewModel) {
         this.viewModel = viewModel;
-
         this.viewModel.addPropertyChangeListener(evt -> {
             switch (evt.getPropertyName()) {
                 case "listaFilmes":
@@ -26,7 +25,7 @@ public class CatalogoFilmesView {
         });
     }
 
-    public void onUsuarioSelecionarFilme(int id) {
+    public void selecionarFilme(int id) {
         System.out.println("-- Usuário selecionou o filme de índice: " + id + "\n");
         viewModel.selecionarFilmeId(id-1);
     }
@@ -36,9 +35,9 @@ public class CatalogoFilmesView {
         for (int i = 0; i < this.exibicaoFilmes.size(); i++) {
             System.out.println((i+1) + "- " + this.exibicaoFilmes.get(i));
         }
-        System.out.println("============================================\n");
+        System.out.println("============================================");
         System.out.println("====== DESCRIÇÃO DO FILME SELECIONADO ======");
         System.out.println(this.filmeSelecionado);
-        System.out.println("============================================\n");
+        System.out.println("============================================\n\n");
     }
 }

@@ -34,4 +34,9 @@ public class Ingresso {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    @Override
+    public String toString() {
+        return "Ingresso para sessão de %s às %2$td/%2$tm/%2$tY às %2$tH:%2$tM".formatted(sessao.getFilme().getTitulo(), sessao.getData());
+    }
 }
