@@ -4,24 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
-    private String id;
+    private int id;
     private String nome;
     private String senha;
     private String email;
     private final List<Ingresso> ingressos = new ArrayList<>();
 
-    public Usuario(String id, String nome, String senha, String email) {
+    public Usuario(int id, String nome, String senha, String email) {
         this.id = id;
         this.nome = nome;
         this.senha = senha;
         this.email = email;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

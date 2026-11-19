@@ -25,6 +25,7 @@ public class CatalogoViewModel {
     }
 
     public void selecionarFilmeId(int id) {
+        id-=1;
         if (id >= 0 && id < this.filmes.size()) {
             this.filmeSelecionado = this.filmes.get(id).toString();
             support.firePropertyChange("filmeSelecionado", null, this.filmeSelecionado);
@@ -33,5 +34,13 @@ public class CatalogoViewModel {
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
+    }
+
+    public List<Filme> getFilmes() {
+        return filmes;
+    }
+
+    public void setFilmes(List<Filme> filmes) {
+        this.filmes = filmes;
     }
 }

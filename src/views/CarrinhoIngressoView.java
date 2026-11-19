@@ -9,7 +9,6 @@ import java.util.List;
 
 public class CarrinhoIngressoView {
     private final CarrinhoViewModel viewModel;
-    private String usuarioLogado = null;
     private List<String> exibicaoSessoes = new ArrayList<>();
     private List<String> exibicaoCarrinho = new ArrayList<>();
 
@@ -17,10 +16,6 @@ public class CarrinhoIngressoView {
         this.viewModel = viewModel;
         this.viewModel.addPropertyChangeListener( evt -> {
             switch (evt.getPropertyName()) {
-                case "usuarioLogado":
-                    this.usuarioLogado = (String) evt.getNewValue();
-                    renderizarCarrinho();
-                    break;
                 case "listaSessoes":
                     this.exibicaoSessoes = (List<String>) evt.getNewValue();
                     renderizarCarrinho();
@@ -38,10 +33,10 @@ public class CarrinhoIngressoView {
             System.out.println((i+1) + "- " + this.exibicaoSessoes.get(i));
         }
         System.out.println("============================================");
-        System.out.printf("=========== CARRINHO DE %s ===========\n", usuarioLogado);
+        System.out.printf("=========== CARRINHO DE usuario ===========\n");
         for (String descricaoIngresso : this.exibicaoCarrinho) {
             System.out.println("- " + descricaoIngresso);
         }
-        System.out.println("============================================\n\n");
+        System.out.println("============================================");
     }
 }

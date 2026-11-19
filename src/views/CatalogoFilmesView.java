@@ -25,11 +25,6 @@ public class CatalogoFilmesView {
         });
     }
 
-    public void selecionarFilme(int id) {
-        System.out.println("-- Usuário selecionou o filme de índice: " + id + "\n");
-        viewModel.selecionarFilmeId(id-1);
-    }
-
     private void renderizarCatalogo() {
         System.out.println("============ CATÁLOGO DE FILMES ============");
         for (int i = 0; i < this.exibicaoFilmes.size(); i++) {
@@ -38,6 +33,6 @@ public class CatalogoFilmesView {
         System.out.println("============================================");
         System.out.println("====== DESCRIÇÃO DO FILME SELECIONADO ======");
         System.out.println(this.filmeSelecionado);
-        System.out.println("============================================\n\n");
+        System.out.println("============================================");
     }
 }

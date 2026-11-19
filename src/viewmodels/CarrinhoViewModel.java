@@ -18,13 +18,6 @@ public class CarrinhoViewModel {
     private List<Ingresso> carrinho = new ArrayList<>();
     private List<String> exibicaoCarrinho = new ArrayList<>();
 
-    public void logarUsuario(Usuario usuario, String senha) {
-        if (senha.equals(usuario.getSenha())){
-            this.usuarioLogado = usuario;
-            support.firePropertyChange("usuarioLogado", null, usuarioLogado.getNome());
-        }
-    }
-
     public void atualizarSessoes(List<Sessao> sessoes) {
         this.sessoes = sessoes;
         this.exibicaoSessoes.clear();
@@ -44,17 +37,13 @@ public class CarrinhoViewModel {
     }
 
     public void comprarIngressos(int id, int quantidade){
+        id-=1;
         if (sessoes.get(id).getNumeroAssentos()>=quantidade && (this.usuarioLogado!=null)){
             for (int i=1; i<=quantidade; i++){
                 Ingresso novoIngresso = new Ingresso(String.valueOf(i), sessoes.get(id), usuarioLogado);
                 carrinho.add(novoIngresso);
             }
-            if (quantidade == sessoes.get(id).getNumeroAssentos()){
-                sessoes.remove(id);
-                atualizarSessoes(sessoes);
-            } else {
-                sessoes.get(id).setNumeroAssentos(sessoes.get(id).getNumeroAssentos() - quantidade);
-            }
+            sessoes.get(id).setNumeroAssentos(sessoes.get(id).getNumeroAssentos() - quantidade);
             atualizarCarrinho(carrinho);
         }
     }
@@ -77,5 +66,17 @@ public class CarrinhoViewModel {
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
+    }
+
+    public List<Sessao> getSessoes() {
+        return sessoes;
+    }
+
+    public void setSessoes(List<Sessao> sessoes) {
+        this.sessoes = sessoes;
+    }
+
+    public void setUsuarioLogado(Usuario usuarioLogado) {
+        this.usuarioLogado = usuarioLogado;
     }
 }

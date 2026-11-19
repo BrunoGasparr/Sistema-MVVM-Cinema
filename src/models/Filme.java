@@ -51,7 +51,7 @@ public class Filme {
 
     @Override
     public String toString() {
-        return "%s\nGênero:%s\nDuração: %d minutos\nClassificação Indicativa: %s\nSinopse: %s".formatted(
+        return "%s\nGênero: %s\nDuração: %d minutos\nClassificação Indicativa: %s\nSinopse: %s".formatted(
                 getTitulo(),  getGenero(), getDuracaoMinutos(), getClassificacaoIndicativa(), getDescricao()
         );
     }
